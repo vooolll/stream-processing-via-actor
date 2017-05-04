@@ -7,7 +7,6 @@ class ProducerTest extends MultiThreadedActorContext {
 
   val producer = system.actorOf(Producer.props(testActor))
   val targetString = "THE COMPLETE SHERLOCK HOLMES"
-  val targetDrop = 4
 
   "Producer" must {
     "receive message Produce and send to testActor value of this line as string" in {

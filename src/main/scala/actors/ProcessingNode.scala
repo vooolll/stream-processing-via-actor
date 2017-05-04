@@ -12,7 +12,7 @@ object ProcessingNode {
 
   case class ShouldProduce(out: ActorRef)
   case class StartProducingQuestions(producer: Option[ActorRef])
-  case class StopProducingQuestions(producer: Option[ActorRef])
+  case object StopProducingQuestions
   case class GetConsumer()
 
   def props(uiActor: ActorRef) = Props(new ProcessingNode(uiActor))
@@ -31,7 +31,7 @@ class ProcessingNode(uiActor: ActorRef) extends Actor {
       shouldProduce = true
       testProducer.getOrElse(producer) ! Produce
       producer ! Produce
-    case StopProducingQuestions(out) =>
+    case StopProducingQuestions =>
       shouldProduce = false
     case Line(text, testProducer) =>
       val trimmed = text.trim

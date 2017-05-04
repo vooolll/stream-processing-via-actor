@@ -29,12 +29,12 @@ class ProcessingNodeTest extends MultiThreadedActorContext {
       expectMsg(true)
     }
 
-    "trigger Producer to send back line index when it receives StopProducingQuestion" in {
+    "trigger Producer to stop producing line when it receives StopProducingQuestion" in {
       val processingNode = fixture.processingNode
       processingNode ! StartProducingQuestions(Some(testProducer.ref))
       testProducer.expectMsg(Produce)
 
-      processingNode ! StopProducingQuestions(Some(testProducer.ref))
+      processingNode ! StopProducingQuestions
       processingNode ! ShouldProduce(testActor)
       expectMsg(false)
     }

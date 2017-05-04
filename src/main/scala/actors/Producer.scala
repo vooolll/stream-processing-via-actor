@@ -13,15 +13,10 @@ object Producer {
   def props(processingNode: ActorRef) = Props(new Producer(processingNode))
 }
 
-/**
-  * Reads file cano.txt and produces lines
-  * @param processingNode receives produced line
-  */
 class Producer(processingNode: ActorRef) extends Actor {
 
   val lineStream = Source.fromFile("src/main/resources/cano.txt").getLines
 
-  var i = 0
   def receive = {
     case Produce =>
       val iterator = lineStream

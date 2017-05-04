@@ -10,7 +10,7 @@ import scala.concurrent.duration.DurationInt
 import scala.concurrent.ExecutionContext.Implicits.global
 
 
-object QuestionApp extends App {
+object ConsoleQuestionApp extends App {
   val system = ActorSystem("question-app")
   val ui = system.actorOf(Props[ConsoleClient])
   implicit val timeout = Timeout(100 second)

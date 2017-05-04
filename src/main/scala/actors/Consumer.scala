@@ -27,14 +27,14 @@ class Consumer(uiActor: ActorRef) extends Actor {
       } else {
         uiActor ! questions
         questions = List.empty[String]
-        processingNode ! StopProducingQuestions(None)
+        processingNode ! StopProducingQuestions
         Thread.sleep(2000)
         println("Loading new batch")
         processingNode ! StartProducingQuestions(None)
       }
     case EndOfFileStream =>
       println("FINISH: No data anymore")
-      processingNode ! StopProducingQuestions(None)
+      processingNode ! StopProducingQuestions
   }
 
 }
